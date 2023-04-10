@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  bot:
+    build: .
+    environment:
+      DATABASE_PORT: 11211
+    restart: on-failure
+    # ports:
+    #   - 3000:3000
+    depends_on:
+      - db
+  db:
+    image: memcached
+    restart: always
+    environment:
+      DATABASE_HOST: memcached-db
+    ports:
+      - 11211:11211
